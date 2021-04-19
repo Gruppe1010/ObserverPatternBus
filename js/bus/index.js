@@ -11,6 +11,8 @@ createBusView("hej");
 function createBusView(bus){
 
   // opretter elementer
+  // TODO: lav inputfelter hvor de skal skrive deres phoneNo + email
+
   const lblDelay = document.createElement('label');
   const lblCancellation = document.createElement('label');
 
