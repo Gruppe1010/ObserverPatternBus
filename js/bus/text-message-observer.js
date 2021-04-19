@@ -1,4 +1,4 @@
-import Observer from "./observer";
+import Observer from "./observer.js";
 
 
 class textMessageObserver extends Observer{

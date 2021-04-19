@@ -1,4 +1,4 @@
-import Bus from "./bus";
+import Bus from "./bus.js";
 // elementet som er i html - som vi tilføjer hele vores body til
 const divBusService = document.getElementById('busService');
 
@@ -34,6 +34,8 @@ function createBusView(bus){
   divBusService.appendChild(bntCancellationEmail);
   divBusService.appendChild(bntCancellationTextMessage);
   divBusService.appendChild(document.createElement('br'));
+
+
 
 
   // udarbejder
