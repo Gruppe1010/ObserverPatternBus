@@ -2,6 +2,7 @@ import Bus from "./bus.js";
 // elementet som er i html - som vi tilføjer hele vores body til
 const divBusService = document.getElementById('busService');
 
+// TODO opret busser her og kald createBusView for hver oprettet bus - forEach(bus => createBusView(bus))
 
 const Bus1 = new Bus("600S");
 
