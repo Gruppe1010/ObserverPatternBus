@@ -1,7 +1,8 @@
 import Observer from "./observer.js";
 
 
-class emailObserver extends Observer{
+
+class EmailObserver extends Observer{
   constructor(email) {
     super();
     this.email = email;
@@ -9,19 +10,18 @@ class emailObserver extends Observer{
 
   update(eventType, bus) {
 
-     function createEventTypeMessage() {
-       let firstPart = `Email til ${this.email}: Bus ${bus.id} er blevet `;
+     const firstPart = `Email til ${this.email}: Bus ${bus.id} er blevet `;
 
-       if(eventType === "delay"){
-         return firstPart + `forsinket med ${bus.delay} minutter`
-       }
-       else {
-         return firstPart + "aflyst"
-       }
+     if(eventType === "delay"){
+       alert(firstPart + `forsinket med ${bus.delay} minutter`);
+     }
+     else {
+       alert(firstPart + "aflyst");
      }
 
-     alert(createEventTypeMessage);
   }
 
 
 }
+
+export default EmailObserver;

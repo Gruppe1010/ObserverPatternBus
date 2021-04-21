@@ -1,7 +1,8 @@
 import Observer from "./observer.js";
 
 
-class textMessageObserver extends Observer{
+
+class TextMessageObserver extends Observer{
   constructor(phoneNo) {
     super();
     this.phoneNo = phoneNo;
@@ -9,17 +10,16 @@ class textMessageObserver extends Observer{
 
   update(eventType, bus) {
 
-    function createEventTypeMessage() {
-      let firstPart = `Sms til ${this.phoneNo}: Bus ${bus.id} er blevet `;
+    const firstPart = `Sms til ${this.phoneNo} Bus ${bus.id} er blevet `;
 
-      if(eventType === "delay"){
-        return firstPart + `forsinket med ${bus.delay} minutter`
-      }
-      else {
-        return firstPart + "aflyst"
-      }
+    if(eventType === "delay"){
+      console.log(firstPart + `forsinket med ${bus.delay} minutter`);
+    }
+    else {
+      console.log(firstPart + "aflyst");
     }
 
-    alert(createEventTypeMessage);
   }
 }
+
+export default TextMessageObserver;

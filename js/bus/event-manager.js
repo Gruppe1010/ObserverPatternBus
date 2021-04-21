@@ -1,10 +1,10 @@
 
 class EventManager{
-  constructor(keys) {
+  constructor(eventTypes) {
     // key = eventType, value = [observer-JSON]
     this.observers = new Map();
 
-    keys.forEach(key => this.observers.set(key, []))
+    eventTypes.forEach(eventType => this.observers.set(eventType, []))
   }
 
   // metode som tilføjer en observer (af enhver type) til array-attributter
@@ -23,6 +23,7 @@ class EventManager{
 
 
   notify(eventType, bus){
+
     // vi henter hele listen ud med observers som skal notificeres ved den specikke eventType
     this.observers.get(eventType).
       // for hver observer på listen, kalder vi update()-metoden

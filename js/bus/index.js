@@ -1,13 +1,33 @@
 import Bus from "./bus.js";
+import EmailObserver from "./email-observer.js";
+import TextMessageObserver from "./text-message-observer.js";
+
+
 // elementet som er i html - som vi tilføjer hele vores body til
 const divBusService = document.getElementById('busService');
 
+const inpEmail = document.getElementById('email');
+const inpPhoneNo = document.getElementById('phoneNo');
+
+
+
+
+
+
 // TODO opret busser her og kald createBusView for hver oprettet bus - forEach(bus => createBusView(bus))
 
-const Bus1 = new Bus("600S");
+const bus1 = new Bus("600S");
 
 
-createBusView("hej");
+
+
+
+
+
+//bus1.eventManager.addObserver('cancellation', new TextMessageObserver(inpPhoneNo.value));
+
+
+createBusView(bus1);
 
 function createBusView(bus){
 
@@ -51,7 +71,48 @@ function createBusView(bus){
   bntCancellationEmail.innerText = "Få besked på email";
   bntCancellationTextMessage.innerText = "Få besked på sms";
 
+  // ? hvordan får man den til at tage en function med params
 
+  bntDelayEmail.addEventListener('click',
+    function(){
+      bus.eventManager.addObserver('delay', new EmailObserver(inpEmail.value));
+    });
+  bntDelayTextMessage.addEventListener('click',
+    function(){
+      bus.eventManager.addObserver('delay', new TextMessageObserver(inpPhoneNo.value));
+    });
+  bntCancellationEmail.addEventListener('click',
+    function(){
+      bus.eventManager.addObserver('cancellation', new EmailObserver(inpEmail.value));
+    });
+  bntCancellationTextMessage.addEventListener('click',
+    function(){
+      bus.eventManager.addObserver('cancellation', new TextMessageObserver(inpPhoneNo.value));
+    });
+}
+
+
+// REFRESH BUTTON
+const btnRefresh = document.createElement('button');
+divBusService.appendChild(btnRefresh);
+btnRefresh.innerText = "Opdater/vis lige bussen";
+btnRefresh.addEventListener('click', refresh);
+
+function refresh(){
+  console.log(bus1);
+}
+
+
+// TEST DELAY
+
+const btnTestDelay = document.createElement('button');
+divBusService.appendChild(btnTestDelay);
+btnTestDelay.innerText = "Test delay";
+btnTestDelay.addEventListener('click', testDelay);
+
+
+function testDelay(){
+  bus1.delayT(10);
 }
 
 

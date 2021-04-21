@@ -6,10 +6,9 @@ class Bus{
     this.eventManager = new EventManager(["delay", "cancellation"]);
     this.delay = 0;
     this.cancellation = false;
-
   }
 
-  delay(delayTime){
+  delayT(delayTime){
     this.delay = delayTime;
 
     // vi sender hele bus-obj med
