@@ -1,42 +1,38 @@
+// vi importerer js-klasser fra vores andre js-dokumenter
 import Bus from "./bus.js";
 import EmailObserver from "./email-observer.js";
 import TextMessageObserver from "./text-message-observer.js";
 
 
-// elementet som er i html - som vi tilføjer hele vores body til
+// vi henter div + inputfelter fra index.html
+  // elementet som vi tilføjer listen af busser til
 const divBusService = document.getElementById('busService');
 
 const inpEmail = document.getElementById('email');
 const inpPhoneNo = document.getElementById('phoneNo');
 
+// opretter busser manuelt
+const busses = [new Bus("600S"),
+  new Bus("4A"),
+  new Bus("116"),
+  new Bus("300S"),
+  new Bus("18"),
+  new Bus("22")]
 
-
-
-
-
-// TODO opret busser her og kald createBusView for hver oprettet bus - forEach(bus => createBusView(bus))
-
-const bus1 = new Bus("600S");
-
-
-
-
-
-
+// opret et busView til alle busser
+busses.forEach(bus => createBusView(bus));
 
 //bus1.eventManager.addObserver('cancellation', new TextMessageObserver(inpPhoneNo.value));
 
-
-createBusView(bus1);
-
+// opretter et view til én bus
+// + se img
 function createBusView(bus){
-
   // opretter elementer
-  // TODO: lav inputfelter hvor de skal skrive deres phoneNo + email
+  const busHeadline = document.createElement('h2');
+  const hr = document.createElement('p');
 
   const lblDelay = document.createElement('label');
   const lblCancellation = document.createElement('label');
-
 
   const bntDelayEmail = document.createElement('button');
   const bntDelayTextMessage = document.createElement('button');
@@ -44,26 +40,30 @@ function createBusView(bus){
   const bntCancellationTextMessage = document.createElement('button');
 
   // tilføjer til DOM
-  divBusService.appendChild(lblDelay);
+  divBusService.appendChild(busHeadline);
 
+  divBusService.appendChild(lblDelay);
   divBusService.appendChild(bntDelayEmail);
   divBusService.appendChild(bntDelayTextMessage);
-  divBusService.appendChild(document.createElement('br'));
-  divBusService.appendChild(document.createElement('br'));
 
+  divBusService.appendChild(document.createElement('br'));
+  divBusService.appendChild(document.createElement('br'));
 
   divBusService.appendChild(lblCancellation);
-
   divBusService.appendChild(bntCancellationEmail);
   divBusService.appendChild(bntCancellationTextMessage);
+
   divBusService.appendChild(document.createElement('br'));
 
+  // udarbejder elementerne
+  busHeadline.innerText = "Bus " + bus.id;
+  hr.innerText = "---------------------------------------------------"
 
+  lblDelay.innerText = "Forsinkelse \xa0";
+  lblDelay.style.fontSize = '18px';
 
-
-  // udarbejder
-  lblDelay.innerText = "Forsinkelse";
-  lblCancellation.innerText = "Aflysning";
+  lblCancellation.innerText = "Aflysning \xa0";
+  lblCancellation.style.fontSize = '18px';
 
   bntDelayEmail.innerText = "Få besked på email";
   bntDelayTextMessage.innerText = "Få besked på sms";
@@ -89,31 +89,56 @@ function createBusView(bus){
     function(){
       bus.eventManager.addObserver('cancellation', new TextMessageObserver(inpPhoneNo.value));
     });
+
+  divBusService.appendChild(document.createElement('br'));
+  divBusService.appendChild(document.createElement('br'));
+
+
+  // REFRESH BUTTON
+  const btnRefresh = document.createElement('button');
+  divBusService.appendChild(btnRefresh);
+  btnRefresh.innerText = "Print bus " + bus.id + " i konsollen";
+  btnRefresh.addEventListener('click', refresh);
+
+  function refresh(){
+    console.log(bus);
+  }
+
+  divBusService.appendChild(document.createElement('br'));
+
+
+// DELAY BUTTON
+  const btnDelay = document.createElement('button');
+  divBusService.appendChild(btnDelay);
+  btnDelay.innerText = "Forsink bus " + bus.id + " med 10 minutter";
+  btnDelay.addEventListener('click', delayBus);
+
+  function delayBus(){
+    bus.delayBus(10)
+  }
+
+  divBusService.appendChild(document.createElement('br'));
+
+
+  // CANCEL BUTTON
+  const btnCancel = document.createElement('button');
+  divBusService.appendChild(btnCancel);
+  btnCancel.innerText = "Aflys bus " + bus.id;
+  btnCancel.addEventListener('click', cancelBus);
+
+  function cancelBus(){
+    bus.cancelBus(true);
+  }
+
+  divBusService.appendChild(hr);
+
 }
 
 
-// REFRESH BUTTON
-const btnRefresh = document.createElement('button');
-divBusService.appendChild(btnRefresh);
-btnRefresh.innerText = "Opdater/vis lige bussen";
-btnRefresh.addEventListener('click', refresh);
-
-function refresh(){
-  console.log(bus1);
-}
 
 
-// TEST DELAY
-
-const btnTestDelay = document.createElement('button');
-divBusService.appendChild(btnTestDelay);
-btnTestDelay.innerText = "Test delay";
-btnTestDelay.addEventListener('click', testDelay);
 
 
-function testDelay(){
-  bus1.delayT(10);
-}
 
 
 

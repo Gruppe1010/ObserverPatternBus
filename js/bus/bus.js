@@ -8,14 +8,14 @@ class Bus{
     this.cancellation = false;
   }
 
-  delayT(delayTime){
+  delayBus(delayTime){
     this.delay = delayTime;
 
     // vi sender hele bus-obj med
     this.eventManager.notify("delay", this);
   }
 
-  cancellation(cancel){
+  cancelBus(cancel){
     this.cancellation = cancel;
 
     // vi sender hele bus-obj med
