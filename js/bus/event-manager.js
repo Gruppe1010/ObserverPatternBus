@@ -8,7 +8,7 @@ class EventManager{
   }
 
   // metode som tilføjer en observer (af enhver type) til array-attributter
-  addObserver(eventType, observer){
+  subscribe(eventType, observer){
     this.observers.get(eventType).push(observer);
   }
 

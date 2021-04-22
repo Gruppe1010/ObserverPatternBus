@@ -75,19 +75,19 @@ function createBusView(bus){
 
   bntDelayEmail.addEventListener('click',
     function(){
-      bus.eventManager.addObserver('delay', new EmailObserver(inpEmail.value));
+      bus.eventManager.subscribe('delay', new EmailObserver(inpEmail.value));
     });
   bntDelayTextMessage.addEventListener('click',
     function(){
-      bus.eventManager.addObserver('delay', new TextMessageObserver(inpPhoneNo.value));
+      bus.eventManager.subscribe('delay', new TextMessageObserver(inpPhoneNo.value));
     });
   bntCancellationEmail.addEventListener('click',
     function(){
-      bus.eventManager.addObserver('cancellation', new EmailObserver(inpEmail.value));
+      bus.eventManager.subscribe('cancellation', new EmailObserver(inpEmail.value));
     });
   bntCancellationTextMessage.addEventListener('click',
     function(){
-      bus.eventManager.addObserver('cancellation', new TextMessageObserver(inpPhoneNo.value));
+      bus.eventManager.subscribe('cancellation', new TextMessageObserver(inpPhoneNo.value));
     });
 
   divBusService.appendChild(document.createElement('br'));
